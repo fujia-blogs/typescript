@@ -23,4 +23,6 @@ const s1 = new Student('sunny', 18, '185xxx');
 
 s1 as People;
 
+// const arr: (string | number)[] = [10, 20, 'a', 'b'] as const;
+
 export {};

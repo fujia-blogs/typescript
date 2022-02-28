@@ -19,3 +19,106 @@
 5. 与泛型的区别：
 
 - 泛型可以出现在类、函数，接口和 type 关键上，但是 infer 只能出现在 extends 泛型约束的条件子句中，同时，infer 后面的数据类型不需要预先定义，可以直接使用。
+
+## 高级类型
+
+1. TS 高级类型提供了很多技巧性强的功能，在项目中使用时，可以带来更简洁、更轻量的实现。
+
+### Extract
+
+1. 语法：
+
+```ts
+type Extract<T, U> = T extends U ? T : never;
+```
+
+### Exclude
+
+1. 语法：
+
+```ts
+type Exclude<T, U> = T extends U ? never : T;
+```
+
+### Record
+
+1. 语法：
+
+```ts
+type Record<K extends keyof any, T> = {
+  [P in K]: T;
+};
+```
+
+2. 理解 - K extends keyof any
+
+- keyof any 返回类型：string | number | symbol
+
+3. 理解 - K in keyof T
+
+4. 理解 - K in T
+
+5. object，Map 和 Record 区别：
+
+Map 与 Record:
+
+- Record 有多种实现方式，Map 需要改底层源码
+- Record 是轻量级的类型。
+
+```ts
+type Record<T> = {
+  [P in keyof any]: T;
+};
+```
+
+读取数据频繁时，建议使用 Record，频繁增删改时，建议使用 Map。
+
+### Pick
+
+1. Pick 主要用于提取某种数据类型的属性，在实际工作中，主要用来提取接口或 type 定义的对象类型中的属性。
+
+2. 语法：
+
+```ts
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+```
+
+### Partial, Required 和 Readonly
+
+1. Required
+
+```ts
+type Required<T> = {
+  [P in keyof T]-?: T[P];
+};
+```
+
+2. Partial
+
+```ts
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+```
+
+3. Readonly
+
+```ts
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+```
+
+### Omit
+
+1. 语法：
+
+```ts
+type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
+```
+
+### 示例
+
+1. 数据扁平化

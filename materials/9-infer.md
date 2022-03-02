@@ -122,3 +122,14 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 ### 示例
 
 1. 数据扁平化
+
+## TS 在 Vuex 的应用
+
+1. 用接口实现函数重载：
+
+```ts
+export interface Commit {
+  (type: string, payload?: any, options?: CommitOptions): void;
+  <P extends Payload>(payloadWithType: P, options?: CommitOptions): void;
+}
+```

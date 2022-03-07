@@ -1,0 +1,28 @@
+{
+  "name": "ts-infer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:build": "tsc -w",
+    "dev:start": "nodemon --watch dist/demos -e js --exec node ./dist/demos/decorator.js",
+    "dev": "concurrently npm:dev:*",
+    "start:parcel": "parcel ./index.html",
+    "tsc": "tsc src/demos/decorator.ts --target es5 -w --experimentalDecorators",
+    "ctrl": "ts-node src/controller/HomeController.ts",
+    "run:app": "nodemon --watch src/ -e ts --exec ts-node ./src/server.ts",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "parcel-bundler": "^1.12.5",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

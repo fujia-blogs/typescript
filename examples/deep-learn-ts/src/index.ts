@@ -16,3 +16,15 @@ class MyPoint implements Point {
 
 let foo1: Point = new MyPoint();
 // let foo2: Point =  MyPoint;
+
+const foo = 123;
+
+const bar = foo.toString();
+
+window.helloWorld = () => console.log('hello world');
+window.helloWorld();
+
+String.prototype.endsWith = function (suffix: string): boolean {
+  const str = this;
+  return str && str.indexOf(suffix, str.length - suffix.length) !== -1;
+};

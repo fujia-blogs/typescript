@@ -54,3 +54,13 @@ let iMakePoint3D = (): Point3D => ({ x: 0, y: 0, z: 0 });
 iMakePoint2D = iMakePoint3D;
 
 // iMakePoint3D = iMakePoint2D;
+
+namespace importing {
+  export class Foo {}
+}
+
+import Bar = importing.Foo;
+
+let bar2: Bar;
+
+// export {}

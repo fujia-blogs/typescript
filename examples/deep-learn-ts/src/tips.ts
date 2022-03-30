@@ -75,3 +75,17 @@ class MyG<T> {
 }
 
 const FooNumber = MyG as { new (): MyG<number> };
+
+class Singleton {
+  private static instance: Singleton;
+
+  private constructor() {}
+
+  static getInstance() {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+  }
+}
+
+// const onFoo = new TypedEvent<Foo>()

@@ -25,4 +25,9 @@ s1 as People;
 
 // const arr: (string | number)[] = [10, 20, 'a', 'b'] as const;
 
+// function metadata(
+//   key: any,
+//   value: any
+// ):
+
 export {};

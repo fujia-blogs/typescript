@@ -36,9 +36,86 @@ TS 可能会改变你的思维方式，从而逐渐养成一个好习惯。如�
 
 ## 环境搭建
 
-1. IDE
+1. IDE 推荐使用 VS Code
 
-- VS Code: 推荐；
+优势：
+
+- 在传统语法⾼亮、⾃动补全功能的基础上拓展了基于变量类型、函数定义，以及引⼊模块的智能补全；
+- 支持在编辑器上直接运行和调试应用；
+- 内置了 Git Comands，能⼤幅提升使⽤ Git 及其他 SCM 管理⼯具的协同开发效率；
+- 基于 Electron 开发，具备超强的扩展性和定制性。
+
+2. 将 VS Code bin ⽬录添加到环境变量 PATH 中的方式：
+
+在 Mac 下：
+
+```sh
+# Vim 编辑“source ~/.bash_profile”
+export PATH="$PATH:/Applications/Visual Studio
+Code.app/Contents/Resources/app/bin"
+
+# 退出编辑后
+source ~/.bash_profile
+```
+
+**另一种推荐的方式是：** 在 VSCode 中，按住 Ctrl+Shift+p，打开命令面板，选择"Shell Command: Install 'code' command in PATH"
+
+这样就可以在终端使用 code [项目目录]打开一个项目。
+
+3. 使用在线开发 TypeScript 的云环境⸺Playground
+
+- 中文：https://www.typescriptlang.org/zh/play?target=1&module=1&ts=4.7.2#code/Q
+- 英文：https://www.typescriptlang.org/play?alwaysStrict=false&target=1&module=1&ts=4.7.2#code/Q
+
+4. TS 的类型注解旨在约束函数或变量。
+
+## 函数类型
+
+1. 在 TypeScript 中，如果我们显式声明函数的返回值类型为 undefined，会得到异常提示: "其声明类型不为 "void" 或 "any" 的函数必须返回值。ts(2355)"。
+
+2. TS 类型中的=>与 ES6 中箭头函数的=>有所不同。TypeScript 函数类型中的=>⽤来表示函数的定义，其左侧是函数的参数类型，右侧是函数的返回值类型；⽽ ES6 中的=>是函数的实现。
+
+### 可缺省和可推断的返回值类型
+
+1. 函数返回值的类型可以在 TypeScript 中被推断出来，即可缺省。
+
+2. 函数内是⼀个相对独⽴的上下⽂环境，可以根据⼊参对值加⼯计算，并返回新的值。从类型层面看，可以通过类型推断加工计算入参的类型，并返回新的类型。
+
+**请记住：这个一个很重要也很有意思的特性，函数返回值的类型推断结合泛型，可以实现特别复杂的类型计算(本质是复杂的类型推断，计算是为了表示其复杂性)**，如：Redux Model 中 State、Reducer、Effect 类型的关联。
+
+3. **generator 函数的返回值**
+
+ES6 中新增的 Generator 函数在 TypeScript 中也有对应的类型定义。
+
+generator 函数返回的是一个 iterator 迭代器对象，可以使用 Generator 的同名接口或 Iterator 的同名接口泛型表示返回值的类型(Generator 类型继承了 Iterator 类型)
+
+**注意：TypeScript 3.6 之前的版本不⽀持指定 next、return 的类型，所以在某些有点历史的代码中，可能会看到 Generator 和 Iterator 类型不⼀样的表述。**
+
+## 参数类型
+
+### 可选参数和默认参数
+
+1. **函数的默认参数类型必须是参数类型的子类型。**
+
+### this
+
+1. this 的值需要等到函数被调用时才能确定，且可以通过一些方法改变 this 的指向。
+
+2. 在 strict 模式下的 TypeScript 中，会提示 this 的类型是 any，需要我们⼿动显式指定类型了。
+
+3. **注意：显式注解函数中的 this 类型，它表⾯上占据了第⼀个形参的位置，但并不意味着函数真的多了⼀个参数，因为 TS 转义后，“伪形参”this 会被抹掉，这是 ts 中为数不多的特有语法。**
+
+4. 在链式调⽤⻛格的库中，使⽤ this 也可以很⽅便地表达出其类型。
+
+## 函数重载
+
+1. JavaScript 是⼀⻔动态语⾔，针对同⼀个函数，它可以有多种不同类型的参数与返回值，这就是函数的多态。
+
+## 类型谓词(is)
+
+在 TypeScript 中，函数还⽀持另外⼀种特殊的类型描述.
+
+1. 通过"参数名+is+类型"的格式明确表明了参数的类型，进而引起类型的缩小，**类型谓词函数的一个重要的应用场景是实现自定义的类型守卫。**
 
 ## 要点
 
